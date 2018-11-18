@@ -2,94 +2,120 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-	depthOfField.setup(ofGetWidth(), ofGetHeight());
-	
-	for(int i = 0; i < 100; i++){
-		boxPositions.push_back(ofVec3f(ofRandom(-300, 300),
-									   ofRandom(-300, 300),
-									   ofRandom(-300, 300)));
-		boxSizes.push_back(ofRandom(30, 100));
-		boxColors.push_back(ofColor::fromHsb(ofRandomuf() > .8 ? ofRandom(120, 130) : 128 - ofRandom(110, 128), //complementing random hues
-											 ofRandom(255),
-											 ofRandom(255)));
-	}
+    
+    b_wireFrame = b_swimDof = true;
+    depthOfField.setup(ofGetWidth(), ofGetHeight());
+    
+    for(int i = 0; i < 100; i++){
+        //  make random box primitives
+        ofBoxPrimitive newBox;
+        newBox.set(ofRandom(30, 100), ofRandom(30, 100), ofRandom(30, 100));
+        newBox.setPosition(ofVec3f(ofRandom(-300, 300),
+                                   ofRandom(-300, 300),
+                                   ofRandom(-300, 300)));
+        for (int side = 0; side<6; side++){ // colour each side
+            newBox.setSideColor(side, ofColor::fromHsb(ofRandomuf() > .8 ? ofRandom(120, 130) : 128 - ofRandom(110, 128), //complementing random hues
+                                                       ofRandom(255), ofRandom(255)));
+        }
+        boxPrims.push_back(newBox);
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-	
-	//swim the depth of field
-	depthOfField.setFocalDistance(ofMap(sin(ofGetElapsedTimef()/2),-1,1, 20, 150));
+    
+    //swim the depth of field
+    if (b_swimDof) depthOfField.setFocalDistance(ofMap(sin(ofGetElapsedTimef()/2),-1,1, 20, 150));
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	depthOfField.begin();
-	
-	camera.begin(depthOfField.getDimensions());
-	
-	ofPushStyle();
-	for(int i = 0; i < boxPositions.size(); i ++){
-		ofSetColor(boxColors[i]);
-		ofBox(boxPositions[i], boxSizes[i]);
-	}
-	ofPopStyle();
-	
-	camera.end();
-	
-	depthOfField.end();
-
-	if(ofGetKeyPressed('f')){
-		depthOfField.drawFocusAssist(0, 0);
-	}
-	else{
-		depthOfField.getFbo().draw(0, 0);
-	}
-	
-	ofDrawBitmapString("fps: " + ofToString(ofGetFrameRate()), 10, 10);
+    //ofEnableAntiAliasing();
+    depthOfField.begin();
+    
+    camera.begin(depthOfField.getDimensions());
+    
+    ofPushStyle();
+    
+    for(int i = 0; i < boxPrims.size(); i ++){
+        if (b_wireFrame){
+            boxPrims[i].drawWireframe();
+            
+        }else {
+            boxPrims[i].draw();
+            
+        }
+    }
+    ofPopStyle();
+    
+    camera.end();
+    
+    depthOfField.end();
+    
+    if(ofGetKeyPressed(' ')){
+        depthOfField.drawFocusAssist(0, 0);
+    }
+    else{
+        depthOfField.getFbo().draw(0, 0);
+    }
+    
+    ofDrawBitmapString("f: toggle fullscreen, w: toggle wireframe, space: focusassist, s: swim DOF \nfps: " + ofToString(ofGetFrameRate()), 10, 10 );
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	
+    switch (key) {
+        case 'f' :
+            ofToggleFullscreen();
+            depthOfField.setup(ofGetWidth(), ofGetHeight());
+            break;
+            
+        case 'w':
+            b_wireFrame=!b_wireFrame;
+        default:
+            
+        case 's':
+            b_swimDof=!b_swimDof;
+            break;
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }

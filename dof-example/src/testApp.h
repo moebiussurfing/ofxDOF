@@ -19,11 +19,10 @@ class testApp : public ofBaseApp{
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 	
-	vector<ofVec3f> boxPositions;
-	vector<float> boxSizes;
-	vector<ofColor> boxColors;
 	
+    vector<ofBoxPrimitive> boxPrims;
 	ofxDOF depthOfField;
 	ofEasyCam camera;
 	
+    bool b_wireFrame, b_swimDof;
 };
