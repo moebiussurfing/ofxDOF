@@ -131,7 +131,8 @@ void ofxDOF::end(){
 	depthOfField.setUniform1f("focalDistance", focalDistance);
 	depthOfField.setUniform1f("focalRange", focalRange);
 	
-	depthOfField.setUniformTexture("tex", dofTarget.getTextureReference(), 0);
+    depthOfField.setUniformTexture("tex", dofTarget.getTexture(), 0);
+	//depthOfField.setUniformTexture("tex", dofTarget.getTextureReference(), 0);
 	depthOfField.setUniformTexture("range", dofTarget.getDepthTexture(), 1);
 	
 	dofQuad.draw();
@@ -151,7 +152,9 @@ void ofxDOF::end(){
 	
 	depthOfField.begin();
 	depthOfField.setUniform2f("sampleOffset", 0, blurAmount);
-	depthOfField.setUniformTexture("tex", swap.getTextureReference(), 0);
+    depthOfField.setUniformTexture("tex", swap.getTexture(), 0);
+
+   // depthOfField.setUniformTexture("tex", swap.getTextureReference(), 0);
 	depthOfField.setUniformTexture("range", dofTarget.getDepthTexture(), 1);
 	
 	dofQuad.draw();
