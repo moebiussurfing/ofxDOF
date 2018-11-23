@@ -3,7 +3,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
-    b_wireFrame = b_swimDof = true;
+    b_wireFrame = false;
+    b_swimDof = true;
     depthOfField.setup(ofGetWidth(), ofGetHeight());
     
     for(int i = 0; i < 100; i++){
