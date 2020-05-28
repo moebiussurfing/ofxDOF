@@ -2,6 +2,8 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
+	gui.setup();
+	gui.add(depthOfField.params);
     
     b_wireFrame = false;
     b_swimDof = true;
@@ -24,7 +26,10 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
+	depthOfField.updateParams();
+
+	//TODO:
+	//thisno updates the internal parmas/gui
     //swim the depth of field
     if (b_swimDof) depthOfField.setFocalDistance(ofMap(sin(ofGetElapsedTimef()/2),-1,1, 20, 150));
 }
@@ -61,6 +66,9 @@ void testApp::draw(){
     }
     
     ofDrawBitmapString("f: toggle fullscreen, w: toggle wireframe, space: focusassist, s: swim DOF \nfps: " + ofToString(ofGetFrameRate()), 10, 10 );
+
+	gui.draw();
+
 }
 
 //--------------------------------------------------------------

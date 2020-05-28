@@ -5,6 +5,19 @@ ofxDOF::ofxDOF(){
 	blurAmount = 1;
 	focalRange = 50;
 	focalDistance = 150;
+
+	//params
+	params.add(blurAmount_);
+	params.add(focalRange_);
+	params.add(focalDistance_);
+	//params.add(debug_);
+}
+
+//params
+void ofxDOF::updateParams() {
+	setBlurAmount(blurAmount_);
+	setFocalRange(focalRange_);
+	setFocalDistance(focalDistance_);
 }
 
 void ofxDOF::setup(){

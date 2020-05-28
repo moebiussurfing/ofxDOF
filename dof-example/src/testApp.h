@@ -3,6 +3,8 @@
 #include "ofMain.h"
 #include "ofxDOF.h"
 
+#include "ofxGui.h"
+
 class testApp : public ofBaseApp{
   public:
 	void setup();
@@ -25,4 +27,7 @@ class testApp : public ofBaseApp{
 	ofEasyCam camera;
 	
     bool b_wireFrame, b_swimDof;
+
+
+	ofxPanel gui;
 };

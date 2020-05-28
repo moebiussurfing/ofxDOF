@@ -20,3 +20,17 @@ obj/
 *.app
 build/
 !data/
+dof-example/.vs/dof-example/v15/Solution.VC.db
+dof-example/.vs/dof-example/v15/Solution.VC.db-shm
+dof-example/.vs/dof-example/v15/Solution.VC.db-wal
+dof-example/bin/dof-example.exe
+dof-example/bin/dof-example.exp
+dof-example/bin/dof-example.lib
+dof-example/bin/fmodex64.dll
+dof-example/bin/fmodexL64.dll
+dof-example/bin/FreeImage.dll
+dof-example/dof-example.sln
+dof-example/dof-example.vcxproj
+dof-example/dof-example.vcxproj.filters
+dof-example/dof-example.vcxproj.user
+dof-example/icon.rc
