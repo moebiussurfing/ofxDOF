@@ -8,6 +8,7 @@ void testApp::setup() {
 
 	b_wireFrame = false;
 	b_swimDof = true;
+
 	depthOfField.setup(ofGetWidth(), ofGetHeight());
 
 	for (int i = 0; i < 100; i++) {
@@ -28,11 +29,11 @@ void testApp::setup() {
 //--------------------------------------------------------------
 void testApp::update() {
 	if (!ofGetKeyPressed(' ')) {
+		//TODO:
+		//this do not updates the internal params/gui
+
 		depthOfField.updateParams();
 	}
-
-	//TODO:
-	//this do not updates the internal params/gui
 
 	//swim the depth of field
 	if (b_swimDof) depthOfField.setFocalDistance(ofMap(sin(ofGetElapsedTimef() / 2), -1, 1, 20, 150));
@@ -41,12 +42,12 @@ void testApp::update() {
 //--------------------------------------------------------------
 void testApp::draw() {
 	//ofEnableAntiAliasing();
+
 	depthOfField.begin();
 
+	//scene
 	camera.begin(depthOfField.getDimensions());
-
 	ofPushStyle();
-
 	for (int i = 0; i < boxPrims.size(); i++) {
 		if (b_wireFrame) {
 			boxPrims[i].drawWireframe();
@@ -58,12 +59,11 @@ void testApp::draw() {
 		}
 	}
 	ofPopStyle();
-
 	camera.end();
 
 	depthOfField.end();
 
-	//-
+	//--
 
 	if (ofGetKeyPressed(' ')) {
 		depthOfField.drawFocusAssist(0, 0);

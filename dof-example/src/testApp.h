@@ -21,13 +21,13 @@ class testApp : public ofBaseApp{
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 	
-	
     vector<ofBoxPrimitive> boxPrims;
+	
 	ofxDOF depthOfField;
+	
 	ofEasyCam camera;
 	
     bool b_wireFrame, b_swimDof;
-
 
 	ofxPanel gui;
 };
